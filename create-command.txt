@@ -1,0 +1,1 @@
+ng new jnet-ui --interactive --create-application --prefix jnet --routing --skip-git --skip-install --strict --style scss

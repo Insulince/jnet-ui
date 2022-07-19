@@ -1,0 +1,78 @@
+@import "../../../../variables";
+
+.input-wrapper {
+  display: inline-block;
+}
+
+.input {
+  -webkit-appearance: none;
+  border: none;
+  border-bottom: 3px $accent solid;
+  font-size: 64px;
+  width: 174px;
+  text-align: center;
+  color: $accent;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  vertical-align: top;
+}
+
+.delete-button {
+  position: relative;
+  left: -32px;
+  width: 16px;
+  height: 16px;
+  line-height: 0;
+  font-size: 16px;
+  padding: 0;
+  min-width: unset;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.add-button {
+  vertical-align: top;
+  width: 77px;
+  height: 77px;
+  line-height: 0;
+  font-size: 72px;
+  padding: 0;
+  min-width: unset;
+  margin-left: 32px;
+}
+
+.special-label {
+  width: 0;
+  white-space: nowrap;
+  float: left;
+  position: relative;
+  font-size: 72px;
+  color: $warn;
+  font-style: italic;
+  user-select: none;
+}
+
+#neuron-map-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#warning {
+  color: $warn;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.cross {
+  margin: 0 12px;
+  display: inline;
+  font-size: 32px;
+  color: $warn;
+}
+
+#wrapper {
+  margin: 0 16px;
+}

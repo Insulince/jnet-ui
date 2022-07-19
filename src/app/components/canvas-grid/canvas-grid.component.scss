@@ -1,0 +1,22 @@
+canvas {
+  border: solid 5px #aaaaaa;
+}
+
+.cell {
+  display: inline-block;
+}
+
+#preview-wrapper {
+  border: solid 5px #aaaaaa;
+  max-width: 256px;
+}
+
+.divider {
+  vertical-align: top;
+  line-height: 0;
+  display: inline-block;
+}
+
+* {
+  user-select: none;
+}

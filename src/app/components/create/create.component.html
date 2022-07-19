@@ -1,0 +1,65 @@
+<p class="title mat-display-3">Create</p>
+<p class="subtitle mat-headline">Create a new network</p>
+<mat-card>
+  <ng-container *ngIf="step == 0">
+    <mat-card-header>
+      <mat-card-title>Neuron Map</mat-card-title>
+      <mat-card-title>The architecture of your network, set the number of layers in the network and number of neurons in those layers</mat-card-title>
+    </mat-card-header>
+  </ng-container>
+  <ng-container *ngIf="step ==1">
+    <mat-card-header>
+      <mat-card-title>Activation Function</mat-card-title>
+      <mat-card-title>The activation function to use across every neuron in the network</mat-card-title>
+    </mat-card-header>
+  </ng-container>
+  <ng-container *ngIf="step == 2">
+    <mat-card-header>
+      <mat-card-title>Input Labels</mat-card-title>
+      <mat-card-title>The {{model.neuronMap[0]}} labels to apply to your input layer neurons</mat-card-title>
+    </mat-card-header>
+  </ng-container>
+  <ng-container *ngIf="step == 3">
+    <mat-card-header>
+      <mat-card-title>Output Labels</mat-card-title>
+      <mat-card-title>The {{model.neuronMap[model.neuronMap.length - 1]}} labels to apply to your output layer neurons</mat-card-title>
+    </mat-card-header>
+  </ng-container>
+  <ng-container *ngIf="step == 4">
+    <mat-card-header>
+      <mat-card-title>Review</mat-card-title>
+      <mat-card-title>Review your network configuration before submitting it</mat-card-title>
+    </mat-card-header>
+  </ng-container>
+  <mat-card-content style="margin-top: 16px;">
+    <ng-container *ngIf="step == 0">
+      <jnet-neuron-map [model]="model" (changed)="onChange.next()"></jnet-neuron-map>
+    </ng-container>
+    <ng-container *ngIf="step == 1">
+      <jnet-activation-function [model]="model" (changed)="onChange.next()"></jnet-activation-function>
+    </ng-container>
+    <ng-container *ngIf="step == 2">
+      <jnet-input-labels [model]="model" (changed)="onChange.next()"></jnet-input-labels>
+    </ng-container>
+    <ng-container *ngIf="step == 3">
+      <jnet-output-labels [model]="model" (changed)="onChange.next()"></jnet-output-labels>
+    </ng-container>
+    <ng-container *ngIf="step == 4">
+      <jnet-review [model]="model" (changed)="onChange.next()"></jnet-review>
+    </ng-container>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="step <= 0" (click)="previous()">PREVIOUS</button>
+      <button mat-raised-button color="primary" [disabled]="step >= 4" (click)="next()" style="float: right;">NEXT</button>
+    </mat-card-actions>
+    <hr/>
+    <div id="preview-wrapper">
+      <p class="mat-headline">Network Preview</p>
+      <jnet-visualizer [model]="model" [redraw]="onChange" [width]="visualizerWidth" [height]="visualizerHeight"
+                       [showLabels]="true" [radius]="20" [layerLimit]="8" [neuronLimit]="10"></jnet-visualizer>
+    </div>
+  </mat-card-content>
+  <mat-card-actions style="padding-bottom: 8px;">
+    <button mat-raised-button color="primary" [disabled]="step <= 0" (click)="previous()">PREVIOUS</button>
+    <button mat-raised-button color="primary" [disabled]="step >= 4" (click)="next()" style="float: right;">NEXT</button>
+  </mat-card-actions>
+</mat-card>

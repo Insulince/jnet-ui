@@ -1,0 +1,32 @@
+<p class="title mat-display-3">Test</p>
+<p class="subtitle mat-headline">Test your network on new data</p>
+<ng-container *ngIf="loading">
+  <mat-spinner style="margin:0 auto;"></mat-spinner>
+</ng-container>
+<ng-container *ngIf="!loading">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Input</mat-card-title>
+      <mat-card-subtitle>Draw the number you want to test</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content style="margin-top: 16px;">
+      <jnet-canvas-grid [width]="canvasWidth" [height]="canvasHeight" [gridRows]="gridRows"
+                        [gridColumns]="gridColumns" [penSize]="penSize" [onReset]="onReset"></jnet-canvas-grid>
+      <mat-checkbox class="example-margin" [(ngModel)]="manualTesting" (change)="testingChanged()">Manual Testing</mat-checkbox>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="test()" [disabled]="!manualTesting">TEST</button>
+      <button mat-raised-button color="warn" (click)="reset()">RESET</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Output</mat-card-title>
+      <mat-card-subtitle>Network's Guess and Confidence</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="mat-display-3" style="text-align: center">{{result.output ? result.output : "N/A"}}</p>
+      <p class="mat-display-1" style="text-align: center">{{result.confidence * 100 | number}}%</p>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

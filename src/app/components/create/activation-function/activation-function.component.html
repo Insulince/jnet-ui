@@ -1,0 +1,36 @@
+<div id="wrapper">
+  <div id="activation-functions-wrapper">
+    <mat-radio-group class="label-group" (change)="activationFunctionChanged()" [(ngModel)]="model.activationFunction">
+      <mat-radio-button value="sigmoid">
+        <div class="af-wrapper">
+          <canvas #sigmoid class="af-preview" width="{{width}}" height="{{height}}"></canvas>
+          <span class="af-label">Sigmoid</span>
+        </div>
+      </mat-radio-button>
+      <mat-radio-button value="relu">
+        <div class="af-wrapper">
+          <canvas #relu class="af-preview" width="{{width}}" height="{{height}}"></canvas>
+          <span class="af-label">Relu</span>
+        </div>
+      </mat-radio-button>
+      <mat-radio-button value="tanh">
+        <div class="af-wrapper">
+          <canvas #tanh class="af-preview" width="{{width}}" height="{{height}}"></canvas>
+          <span class="af-label">Tanh</span>
+        </div>
+      </mat-radio-button>
+      <mat-radio-button value="linear">
+        <div class="af-wrapper">
+          <canvas #linear class="af-preview" width="{{width}}" height="{{height}}"></canvas>
+          <span class="af-label">Linear</span>
+        </div>
+      </mat-radio-button>
+      <mat-radio-button value="noop">
+        <div class="af-wrapper">
+          <canvas #noop class="af-preview" width="{{width}}" height="{{height}}"></canvas>
+          <span class="af-label">Noop</span>
+        </div>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>

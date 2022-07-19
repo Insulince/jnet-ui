@@ -1,0 +1,59 @@
+@import "../../../variables.scss";
+
+#wrapper {
+  background-color: $primary;
+}
+
+#title {
+  font-size: 30px;
+}
+
+mat-list {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+mat-list a, mat-list div {
+  display: inline-block;
+  width: auto;
+  text-decoration: none;
+  color: white;
+  font-weight: bolder;
+}
+
+mat-list div {
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+#network-info {
+  width: 190px;
+  display: block;
+  text-align: center;
+}
+
+#network-info * {
+  margin: 0;
+}
+
+.inline-link {
+  display: inline;
+  color: $accent !important;
+}
+
+#active-network {
+  color: $accent;
+}
+
+#deactivate-button {
+  width: 14px;
+  height: 14px;
+  line-height: 0;
+  font-size: 12px;
+  padding: 0;
+  min-width: unset;
+  box-shadow: none;
+  border-radius: 0;
+  margin-left: 8px !important;
+}

@@ -1,0 +1,25 @@
+<p class="title mat-display-3">{{networkId}}</p>
+<p class="subtitle mat-headline">View your network's details</p>
+<ng-container *ngIf="loading">
+  <mat-spinner style="margin: 0 auto;"></mat-spinner>
+</ng-container>
+<ng-container *ngIf="!loading">
+  <mat-card style="margin: 32px">
+    <mat-card-header>
+      <mat-card-title>{{network.id}} - {{network.neuronMap}}<span style="float: right;">active</span></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div id="content-wrapper">
+        <div>
+          <p>ID: {{network.id}}</p>
+          <p>Neuron Map: {{network.neuronMap}}</p>
+          <p>Input Labels: {{network.inputLabels}}</p>
+          <p>Output Labels: {{network.outputLabels}}</p>
+          <p>Activation Function: {{network.activationFunction}}</p>
+        </div>
+        <jnet-visualizer [model]="network" [redraw]="onChange" [showLabels]="false" [width]="width"
+                         [height]="height" [radius]="10" [layerLimit]="6" [neuronLimit]="8"></jnet-visualizer>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

@@ -1,0 +1,13 @@
+::ng-deep .mat-card-header-text {
+  width: 100%;
+}
+
+mat-chip-list {
+  margin-left: auto;
+}
+
+mat-chip {
+  min-height: 22px;
+  padding: 6px 10px;
+  font-size: 10px;
+}

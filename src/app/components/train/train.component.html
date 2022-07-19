@@ -1,0 +1,50 @@
+<p class="title mat-display-3">Train</p>
+<p class="subtitle mat-headline">Train your network against its training data</p>
+<ng-container *ngIf="loading">
+  <mat-spinner style="margin: 0 auto;"></mat-spinner>
+</ng-container>
+<ng-container *ngIf="!loading">
+  <mat-card>
+    <mat-card-content>
+      <div id="training-progress">
+        <ng-container *ngFor="let line of lines">
+          <p>{{line === "" ? "&nbsp;" : line}}</p>
+        </ng-container>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Training Configuration</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div id="content-wrapper">
+        <form>
+          <mat-form-field>
+            <mat-label>Learning Rate</mat-label>
+            <input matInput name="learning-rate" type="number" min="0" [(ngModel)]="learningRate"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Average Loss Cutoff</mat-label>
+            <input matInput name="average-loss-cutoff" type="number" min="0" [(ngModel)]="averageLossCutoff"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Minimum Loss Cutoff</mat-label>
+            <input matInput name="minimum-loss-cutoff" type="number" min="0" [(ngModel)]="minLossCutoff"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Maximum Iterations</mat-label>
+            <input matInput name="maximum-iterations" type="number" min="0" [(ngModel)]="maxIterations"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Mini Batch Size</mat-label>
+            <input matInput name="mini-batch-size" type="number" min="0" [(ngModel)]="miniBatchSize"/>
+          </mat-form-field>
+        </form>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="train()">TRAIN</button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

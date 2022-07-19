@@ -1,0 +1,31 @@
+<div id="wrapper">
+  <div id="input-labels-wrapper">
+    <label>Label Mode</label>
+    <mat-radio-group class="label-group" (change)="inputLabelsChanged()" [(ngModel)]="model.inputLabelMode">
+      <mat-radio-button value="ordinal">Ordinal - 1, 2, 3...</mat-radio-button>
+      <mat-radio-button value="index">Index - 0, 1, 2...</mat-radio-button>
+      <mat-radio-button value="alphabetical">Alphabetical - a, b, c... (recommended max: 26)</mat-radio-button>
+      <mat-radio-button value="manual">Manual</mat-radio-button>
+      <mat-radio-button value="function">Function - returns a string for each label, i = index</mat-radio-button>
+    </mat-radio-group>
+    <ng-container *ngIf="model.inputLabelMode == 'ordinal'">
+      1, 2, 3...
+    </ng-container>
+    <ng-container *ngIf="model.inputLabelMode == 'index'">
+      0, 1, 2...
+    </ng-container>
+    <ng-container *ngIf="model.inputLabelMode == 'alphabetical'">
+      a, b, c...
+    </ng-container>
+    <ng-container *ngIf="model.inputLabelMode == 'manual'">
+      <ng-container *ngFor="let i of range(model.neuronMap[0])">
+        <p style="display: inline-block;">#{{i + 1}}</p>
+        <input style="display: inline-block; width: 64px; margin-right: 16px;" type="text"
+               onclick="this.select()" (input)="manualInputLabelChanged()" [(ngModel)]="model.inputLabels[i]"/>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="model.inputLabelMode == 'function'">
+      <input type="text" (input)="inputLabelFunctionChanged()" [(ngModel)]="model.inputLabelFunction"/>
+    </ng-container>
+  </div>
+</div>

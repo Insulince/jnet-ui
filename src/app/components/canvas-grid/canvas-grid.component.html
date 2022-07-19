@@ -1,0 +1,16 @@
+<div class="divider">
+  <p>Whiteboard | Bad: <span [style.color]="bad ? 'red': 'black'">{{bad}}</span></p>
+  <canvas #canvas width="{{width}}" height="{{height}}"></canvas>
+</div>
+<div class="divider" style="float: right;">
+  <p>Preview</p>
+  <div id="preview-wrapper">
+    <ng-container *ngFor="let row of grid.cells">
+      <ng-container *ngFor="let num of row">
+        <div class="cell" class="cell" [style.background-color]="'rgb('+num+', '+num+', '+num+')'"
+             [style.width]="tileWidth+'px'"
+             [style.height]="tileHeight+'px'"></div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

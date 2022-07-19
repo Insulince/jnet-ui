@@ -1,0 +1,47 @@
+<p id="title" class="title mat-display-3">Data</p>
+<p class="subtitle mat-headline">Add training data to your network</p>
+<ng-container *ngIf="loading">
+  <mat-spinner style="margin: 0 auto;"></mat-spinner>
+</ng-container>
+<ng-container *ngIf="!loading">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Draw: <b style="font-size: 32px;">{{num}}</b></mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="margin-top: 16px;">
+      <jnet-canvas-grid [width]="canvasWidth" [height]="canvasHeight" [gridRows]="gridRows"
+                        [gridColumns]="gridColumns" [penSize]="penSize" [onReset]="onReset"></jnet-canvas-grid>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="stage()">STAGE</button>
+      <button mat-raised-button color="warn" (click)="reset()">RESET</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Staged Training Data</mat-card-title>
+      <mat-card-subtitle>Stats about the training data you have yet to submit</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p style="text-align: center">Quantity: {{trainingData.length}}</p>
+      <div class="hums">
+        <p>0: {{nums[0]}}</p>
+        <p>1: {{nums[1]}}</p>
+        <p>2: {{nums[2]}}</p>
+        <p>3: {{nums[3]}}</p>
+        <p>4: {{nums[4]}}</p>
+      </div>
+      <div class="nums">
+        <p>5: {{nums[5]}}</p>
+        <p>6: {{nums[6]}}</p>
+        <p>7: {{nums[7]}}</p>
+        <p>8: {{nums[8]}}</p>
+        <p>9: {{nums[9]}}</p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="submit()">SUBMIT</button>
+      <button mat-raised-button color="warn" (click)="clear()">CLEAR</button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

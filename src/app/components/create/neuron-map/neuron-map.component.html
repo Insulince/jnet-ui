@@ -1,0 +1,26 @@
+<div id="wrapper">
+  <div id="neuron-map-wrapper">
+    <ng-container *ngFor="let layer of nm; let i = index">
+      <div class="input-wrapper">
+        <input class="input" type="number" max="9999" min="1" onclick="this.select()"
+               (input)="neuronMapChanged($event, i)" [(ngModel)]="nm[i].layerSize"/>
+        <ng-container *ngIf="i !== 0 && i !== nm.length - 1">
+          <button class="delete-button" mat-raised-button color="warn" (click)="removeLayer(i)">&times;</button>
+        </ng-container>
+        <ng-container *ngIf="i === 0">
+          <span class="spacial-label">Input</span>
+        </ng-container>
+        <ng-container *ngIf="i === nm.length - 1">
+          <span class="spacial-label">Output</span>
+        </ng-container>
+      </div>
+      <ng-container *ngIf="i !== nm.length - 1">
+        <p class="cross">&times;</p>
+      </ng-container>
+    </ng-container>
+    <button class="add-button" mat-raised-button color="primary" (click)="addLayer()">+</button>
+  </div>
+  <ng-container *ngIf="model.neuronMap.length > 4">
+    <p id="warning" class="mat-small">Warning: most neural networks do not need more than 4 layers. You can use more than 4 if you wish, but training will take substantially longer with likely very little benefit in results.</p>
+  </ng-container>
+</div>

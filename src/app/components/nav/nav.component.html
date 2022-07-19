@@ -1,0 +1,32 @@
+<div id="wrapper" class="mat-elevation-z6">
+  <mat-list role="list">
+    <a id="title" mat-list-item [routerLink]="['/home']">JNet</a>
+    <a mat-list-item [routerLink]="['/create']">CREATE</a>
+    <a mat-list-item [routerLink]="['/choose']">CHOOSE</a>
+    <ng-container *ngIf="loading">
+      <mat-spinner [color]="'accent'" [diameter]="32" [strokeWidth]="4" style="margin-left: 12px;"></mat-spinner>
+    </ng-container>
+    <ng-container *ngIf="activeNetworkId !== '' && !loading">
+      <a mat-list-item [routerLink]="['/data/', activeNetworkId]">DATA</a>
+      <a mat-list-item [routerLink]="['/train/', activeNetworkId]">TRAIN</a>
+      <a mat-list-item [routerLink]="['/test/', activeNetworkId]">TEST</a>
+    </ng-container>
+    <div id="network-info">
+      <p style="margin: 0">Active Network</p>
+      <div style="font-size: 12px;">
+        <ng-container *ngIf="loading">
+          <mat-spinner [color]="'accent'" [diameter]="16" [strokeWidth]="2"></mat-spinner>
+        </ng-container>
+        <ng-container *ngIf="!loading">
+          <ng-container *ngIf="network === null">
+            None - <a class="inline-link" [routerLink]="'/create'">Create</a> or <a class="inline-link" [routerLink]="'/choose'">Choose</a> one
+          </ng-container>
+          <ng-container *ngIf="network !== null">
+            <a id="active-network" [routerLink]="['/view/', activeNetworkId]">{{network.id}}</a>
+            <button id="deactivate-button" mat-raised-button color="warn" (click)="deactivateNetwork()">&times;</button>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </mat-list>
+</div>

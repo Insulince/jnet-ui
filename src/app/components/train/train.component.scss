@@ -1,0 +1,28 @@
+p {
+  margin: 0;
+}
+
+mat-card {
+  margin: 32px;
+}
+
+#training-progress {
+  margin: 8px;
+  padding: 8px;
+  border: solid 5px #444444;
+  background-color: #222222;
+  color: #eeeeee;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  font-weight: bolder;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+form {
+  min-width: 150px;
+  max-width: 200px;
+  width: 100%;
+}

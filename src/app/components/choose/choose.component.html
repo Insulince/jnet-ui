@@ -1,0 +1,48 @@
+<p class="title mat-display-3">Choose</p>
+<p class="subtitle mat-headline">Choose a network to operate on</p>
+<ng-container *ngIf="loading">
+  <mat-spinner style="margin: 0 auto;"></mat-spinner>
+</ng-container>
+<ng-container *ngIf="!loading">
+  <div style="margin: 32px;">
+    <mat-accordion>
+      <ng-container *ngFor="let network of networks">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{network.id}}</mat-panel-title>
+            <mat-panel-description>
+              {{network.neuronMap}}
+              <ng-container *ngIf="isActiveNetwork(network.id)">
+                <mat-chip-list>
+                  <mat-chip color="accent" selected>ACTIVE</mat-chip>
+                </mat-chip-list>
+              </ng-container>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div style="display: flex; justify-content: space-between">
+            <div style="display: inline-block">
+              <p>ID: {{network.id}}</p>
+              <p>Neuron Map: {{network.neuronMap}}</p>
+              <p>Input Labels: {{network.inputLabels}}</p>
+              <p>Output Labels: {{network.outputLabels}}</p>
+              <p>Activation Function: {{network.activationFunction}}</p>
+            </div>
+            <div style="display: inline-block">
+              <jnet-visualizer [model]="network" [redraw]="onChange" [showLabels]="false" [width]="width"
+                               [height]="height" [radius]="10" [layerLimit]="6" [neuronLimit]="8"></jnet-visualizer>
+            </div>
+          </div>
+          <div>
+            <ng-container *ngIf="!isActiveNetwork(network.id)">
+              <button mat-raised-button color="primary" (click)="activateNetwork(network.id)">ACTIVATE</button>
+            </ng-container>
+            <ng-container *ngIf="isActiveNetwork(network.id)">
+              <button mat-raised-button color="primary" (click)="viewNetwork()">VIEW</button>
+            </ng-container>
+            <button mat-raised-button color="warn" (click)="deleteNetwork(network.id)" style="float: right;">DELETE</button>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+  </div>
+</ng-container>
