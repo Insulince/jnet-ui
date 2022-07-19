@@ -1,0 +1,16 @@
+.angular/
+.idea/
+.git/
+dist/
+node_modules/
+.browserslistrc
+.dockerignore
+.editorconfig
+.gitignore
+create-command.txt
+Dockerfile
+karma.conf.js
+Makefile
+README.md
+**/*.spec.ts
+*.iml

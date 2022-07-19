@@ -1,4 +1,6 @@
 .idea/
 node_modules/
 .vscode/
+.angular/
+dist/
 *.iml

@@ -52,7 +52,7 @@ import {webSocket, WebSocketSubjectConfig} from "rxjs/webSocket";
   providedIn: "root"
 })
 export class ApiService {
-  private readonly host: string = `localhost:8080`;
+  private readonly host: string = `34.134.45.96:8080`;
   private readonly url: string = `http://${this.host}`;
 
   public constructor(private http: HttpClient) {
