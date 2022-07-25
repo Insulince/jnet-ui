@@ -5,6 +5,7 @@ import {ApiService} from "../../services/api.service";
 import {StorageService} from "../../services/storage.service";
 import {Router} from "@angular/router";
 import {DeleteNetworkResponse, SearchNetworksResponse} from "../../models/api.model";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: "jnet-choose",
@@ -26,9 +27,9 @@ export class ChooseComponent implements OnInit {
   public ngOnInit(): void {
     this.loading = true;
     this.api.searchNetworks(null, true).subscribe(
-      (res: SearchNetworksResponse) => {
+      (res: HttpResponse<SearchNetworksResponse>) => {
         this.loading = false;
-        this.networks = res.networks;
+        this.networks = res.body!.networks;
       },
       (error: Error): void => {
         console.error(error);
@@ -58,13 +59,13 @@ export class ChooseComponent implements OnInit {
     }
 
     this.api.deleteNetwork(null, networkId).pipe(
-      tap((_: DeleteNetworkResponse): void => this.storageSvc.clearActiveNetworkId()),
-      switchMap((_: DeleteNetworkResponse): Observable<SearchNetworksResponse> => {
+      tap((_: HttpResponse<DeleteNetworkResponse>): void => this.storageSvc.clearActiveNetworkId()),
+      switchMap((_: HttpResponse<DeleteNetworkResponse>): Observable<HttpResponse<SearchNetworksResponse>> => {
         return this.api.searchNetworks(null);
       })
     ).subscribe(
-      (res: SearchNetworksResponse): void => {
-        this.networks = res.networks;
+      (res: HttpResponse<SearchNetworksResponse>): void => {
+        this.networks = res.body!.networks!;
       }
     );
   }

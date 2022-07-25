@@ -6,6 +6,7 @@ import {ApiService} from "../../services/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {GridService} from "../../services/grid.service";
 import {Grid} from "../../models/grid.model";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: "jnet-test",
@@ -48,7 +49,7 @@ export class TestComponent implements OnInit, OnDestroy {
           this.result = {confidence: 0, output: "N/A"};
         }
       }),
-      switchMap((): Observable<TestNetworkResponse> | Observable<null> => {
+      switchMap((): Observable<HttpResponse<TestNetworkResponse>> | Observable<null> => {
         if (this.manualTesting || inFlight) {
           if (this.blank()) {
             this.result = {confidence: 0, output: "N/A"};
@@ -62,8 +63,8 @@ export class TestComponent implements OnInit, OnDestroy {
         inFlight = true;
         return this.api.testNetwork(req, this.networkId).pipe(
           tap(
-            (res: TestNetworkResponse): void => {
-              this.result = res;
+            (res: HttpResponse<TestNetworkResponse>): void => {
+              this.result = res.body!;
             }
           ),
           finalize(() => inFlight = false)
@@ -81,8 +82,8 @@ export class TestComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.networkId = this.route.snapshot.params["networkId"];
     this.api.getNetwork(null, this.networkId).subscribe(
-      (response: GetNetworkResponse): void => {
-        this.network = response;
+      (res: HttpResponse<GetNetworkResponse>): void => {
+        this.network = res.body!;
         this.loading = false;
       },
       (error: Error): void => {
@@ -99,8 +100,8 @@ export class TestComponent implements OnInit, OnDestroy {
       input: grid.flatten()
     };
     this.api.testNetwork(req, this.networkId).subscribe(
-      (res: TestNetworkResponse): void => {
-        this.result = res;
+      (res: HttpResponse<TestNetworkResponse>): void => {
+        this.result = res.body!;
       }
     );
   }

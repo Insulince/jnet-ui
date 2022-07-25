@@ -4,6 +4,7 @@ import {ApiService} from "../../services/api.service";
 import {StorageService} from "../../services/storage.service";
 import {Router} from "@angular/router";
 import {GetNetworkResponse} from "../../models/api.model";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: "jnet-nav",
@@ -36,9 +37,9 @@ export class NavComponent implements OnInit {
       return
     }
     this.api.getNetwork(null, this.activeNetworkId).subscribe(
-      (res: GetNetworkResponse): void => {
+      (res: HttpResponse<GetNetworkResponse>): void => {
         this.loading = false;
-        this.network = res;
+        this.network = res.body;
       },
       (error: Error): void => {
         console.error(error);

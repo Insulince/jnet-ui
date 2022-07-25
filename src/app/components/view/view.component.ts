@@ -4,6 +4,7 @@ import {Network} from "../../models/network.model";
 import {ApiService} from "../../services/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {GetNetworkResponse} from "../../models/api.model";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: "jnet-view",
@@ -30,8 +31,8 @@ export class ViewComponent implements OnInit {
     this.loading = true;
     this.networkId = this.route.snapshot.params["networkId"];
     this.api.getNetwork(null, this.networkId).subscribe(
-      (response: GetNetworkResponse): void => {
-        this.network = response;
+      (res: HttpResponse<GetNetworkResponse>): void => {
+        this.network = res.body!;
         this.loading = false;
       },
       (error: Error): void => {

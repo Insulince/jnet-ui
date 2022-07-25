@@ -7,6 +7,7 @@ import {ActivatedRoute} from "@angular/router";
 import {GridService} from "../../services/grid.service";
 import {AddTrainingDataRequest, AddTrainingDataResponse, GetNetworkResponse} from "../../models/api.model";
 import {Grid} from "../../models/grid.model";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: "jnet-data",
@@ -59,8 +60,8 @@ export class DataComponent implements OnInit {
     this.loading = true;
     this.networkId = this.route.snapshot.params["networkId"];
     this.api.getNetwork(null, this.networkId).subscribe(
-      (response: GetNetworkResponse): void => {
-        this.network = response;
+      (res: HttpResponse<GetNetworkResponse>): void => {
+        this.network = res.body!;
         this.loading = false;
       },
       (error: Error): void => {
@@ -97,7 +98,7 @@ export class DataComponent implements OnInit {
       trainingData: this.trainingData
     }
     this.api.addTrainingData(req, this.networkId).subscribe(
-      (_: AddTrainingDataResponse): void => {
+      (_: HttpResponse<AddTrainingDataResponse>): void => {
         this.reset();
         this.clear();
       }
