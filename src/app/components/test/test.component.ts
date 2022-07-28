@@ -1,7 +1,7 @@
 import {Component, HostListener, OnDestroy, OnInit} from "@angular/core";
 import {Network} from "../../models/network.model";
 import {GetNetworkResponse, TestNetworkRequest, TestNetworkResponse} from "../../models/api.model";
-import {finalize, Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
+import {catchError, finalize, Observable, of, Subject, switchMap, takeUntil, tap} from "rxjs";
 import {ApiService} from "../../services/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {GridService} from "../../services/grid.service";
@@ -43,7 +43,7 @@ export class TestComponent implements OnInit, OnDestroy {
     this.fetchNetwork();
 
     let inFlight: boolean = false;
-    this.gridSvc.onChance.pipe(
+    this.gridSvc.onChange.pipe(
       tap(() => {
         if (this.manualTesting) {
           this.result = {confidence: 0, output: "N/A"};
@@ -70,7 +70,8 @@ export class TestComponent implements OnInit, OnDestroy {
           finalize(() => inFlight = false)
         );
       }),
-      takeUntil(this.onDestroy)
+      takeUntil(this.onDestroy),
+      catchError((error: Error, c) => c),
     ).subscribe();
   }
 

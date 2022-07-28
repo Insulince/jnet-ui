@@ -8,7 +8,7 @@ import { Injectable } from "@angular/core";
 export class GridService {
   public grid: BehaviorSubject<Grid> = new BehaviorSubject<Grid>(new Grid([]));
 
-  public onChance: Subject<void> = new Subject<void>();
+  public onChange: Subject<void> = new Subject<void>();
 
   public constructor() {
   }

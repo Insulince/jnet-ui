@@ -255,7 +255,7 @@ export class CanvasGridComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.grid = new Grid(cells);
     this.gridSvc.grid.next(this.grid);
-    this.gridSvc.onChance.next();
+    this.gridSvc.onChange.next();
 
     // restore original canvas data to hide centering from user.
     this.ctx.putImageData(originalImageData, 0, 0);
