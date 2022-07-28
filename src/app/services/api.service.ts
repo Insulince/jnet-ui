@@ -63,7 +63,7 @@ export class ApiService {
 
   // POST /networks
   public createNetwork(request: CreateNetworkRequest): Observable<HttpResponse<CreateNetworkResponse>> {
-    return this.http.post<CreateNetworkResponse>(`${this.url}/networks`, request, {observe: "response"});
+    return this.http.post<CreateNetworkResponse>(`${this.url}/networks`, request, {observe: "response", responseType: "text" as any});
   }
 
   // GET /networks
@@ -146,7 +146,7 @@ export class ApiService {
 
   // POST /networks/{networkId}/train
   public trainNetwork(request: TrainNetworkRequest, networkId: string): Observable<HttpResponse<TrainNetworkResponse>> {
-    return this.http.post<TrainNetworkResponse>(`${this.url}/networks/${networkId}/train`, request, {observe: "response"});
+    return this.http.post<TrainNetworkResponse>(`${this.url}/networks/${networkId}/train`, request, {observe: "response", responseType: "text" as any});
   }
 
   // GET /networks/{networkId}/train/status
@@ -184,6 +184,6 @@ export class ApiService {
 
   // GET /health
   public healthCheck(_: HealthCheckRequest): Observable<HttpResponse<HealthCheckResponse>> {
-    return this.http.get<HealthCheckResponse>(`${this.url}/health`, {observe: "response"});
+    return this.http.get<HealthCheckResponse>(`${this.url}/health`, {observe: "response", responseType: "text" as any});
   }
 }

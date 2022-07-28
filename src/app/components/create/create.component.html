@@ -45,21 +45,26 @@
       <jnet-output-labels [model]="model" (changed)="onChange.next()"></jnet-output-labels>
     </ng-container>
     <ng-container *ngIf="step == 4">
-      <jnet-review [model]="model" (changed)="onChange.next()"></jnet-review>
+      <jnet-review [model]="model" (changed)="onChange.next()" (creating)="creating($event)"></jnet-review>
     </ng-container>
     <mat-card-actions>
-      <button mat-raised-button color="primary" [disabled]="step <= 0" (click)="previous()">PREVIOUS</button>
-      <button mat-raised-button color="primary" [disabled]="step >= 4" (click)="next()" style="float: right;">NEXT</button>
+      <button mat-raised-button color="primary" [disabled]="step <= 0 || loading" (click)="previous()">PREVIOUS</button>
+      <button mat-raised-button color="primary" [disabled]="step >= 4 || loading" (click)="next()" style="float: right;">NEXT</button>
     </mat-card-actions>
     <hr/>
     <div id="preview-wrapper">
       <p class="mat-headline">Network Preview</p>
-      <jnet-visualizer [model]="model" [redraw]="onChange" [width]="visualizerWidth" [height]="visualizerHeight"
-                       [showLabels]="true" [radius]="20" [layerLimit]="8" [neuronLimit]="10"></jnet-visualizer>
+      <ng-container *ngIf="!loading">
+        <jnet-visualizer [model]="model" [redraw]="onChange" [width]="visualizerWidth" [height]="visualizerHeight"
+                         [showLabels]="true" [radius]="20" [layerLimit]="8" [neuronLimit]="10"></jnet-visualizer>
+      </ng-container>
+      <ng-container *ngIf="loading">
+        <mat-spinner [color]="'accent'" [diameter]="128" [strokeWidth]="16" style="margin: 0 auto;"></mat-spinner>
+      </ng-container>
     </div>
   </mat-card-content>
   <mat-card-actions style="padding-bottom: 8px;">
-    <button mat-raised-button color="primary" [disabled]="step <= 0" (click)="previous()">PREVIOUS</button>
-    <button mat-raised-button color="primary" [disabled]="step >= 4" (click)="next()" style="float: right;">NEXT</button>
+    <button mat-raised-button color="primary" [disabled]="step <= 0 || loading" (click)="previous()">PREVIOUS</button>
+    <button mat-raised-button color="primary" [disabled]="step >= 4 || loading" (click)="next()" style="float: right;">NEXT</button>
   </mat-card-actions>
 </mat-card>

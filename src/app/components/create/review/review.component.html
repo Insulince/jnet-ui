@@ -3,5 +3,10 @@
   <p>Activation Function: {{model.activationFunction}}</p>
   <p>Input Labels: {{model.inputLabels}}</p>
   <p>Output Labels: {{model.outputLabels}}</p>
-  <button mat-raised-button color="accent" (click)="create()">CREATE</button>
+  <button mat-raised-button color="accent" (click)="create()" [disabled]="loading">
+    <ng-container *ngIf="!loading">CREATE</ng-container>
+    <ng-container *ngIf="loading">
+      <mat-spinner [color]="'primary'" [diameter]="24" [strokeWidth]="3" style="min-height: 36px; margin: 12px auto 0 auto;"></mat-spinner>
+    </ng-container>
+  </button>
 </div>

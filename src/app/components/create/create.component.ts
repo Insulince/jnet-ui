@@ -26,6 +26,8 @@ export class CreateComponent implements OnInit {
   public visualizerWidth: number = document.body.offsetWidth * 0.9;
   public visualizerHeight: number = 500;
 
+  public loading: boolean = false;
+
   public constructor() {
   }
 
@@ -50,7 +52,7 @@ export class CreateComponent implements OnInit {
   }
 
   public next(): void {
-    if (this.step >= 4) {
+    if (this.step >= 4 || this.loading) {
       return;
     }
 
@@ -58,11 +60,15 @@ export class CreateComponent implements OnInit {
   }
 
   public previous(): void {
-    if (this.step <= 0) {
+    if (this.step <= 0 || this.loading) {
       return;
     }
 
     this.step--;
+  }
+
+  public creating(creating: boolean): void {
+    this.loading = creating
   }
 
   @HostListener("document:keydown", ["$event"])
