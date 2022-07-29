@@ -1,0 +1,1 @@
+This functions the same as a .gitkeep, but if its named that way then go can't find it to embed as a filesystem.

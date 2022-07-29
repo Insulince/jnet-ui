@@ -1,6 +1,9 @@
 .idea/
-node_modules/
 .vscode/
+node_modules/
 .angular/
-dist/
+dist/*
+!dist/gitkeep
 *.iml
+.DS_Store
+Thumbs.db
